@@ -8,5 +8,5 @@
 int string_format(char *s)
 {
 	cprintf(s, _strlen(s));
-	return (_strlen(s) - 1);
+	return (_strlen(s));
 }
