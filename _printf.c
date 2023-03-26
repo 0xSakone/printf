@@ -8,7 +8,7 @@
 int _printf(const char * const format, ...)
 {
 	int i = 0, count = 0;
-	char current_character;
+	//char current_character;
 	va_list args;
 
 	va_start(args, format);
@@ -21,8 +21,7 @@ int _printf(const char * const format, ...)
 			{
 				case '%':
 					count++;
-					current_character = format[i];
-					cprintf(&current_character, 1);
+					character_format(format[i]);
 					i++;
 					continue;
 				case 'c':
@@ -32,13 +31,17 @@ int _printf(const char * const format, ...)
 				case 's':
 					count += string_format(va_arg(args, char *));
 					break;
+				default:
+                    count++;
+					character_format(format[i]);
+					i++;
+					continue;
 			}
 		}
 		else if (format[i] != '\0')
 		{
 			count++;
-			current_character = format[i];
-			cprintf(&current_character, 1);
+			character_format(format[i]);
 		}
 		i++;
 	}
