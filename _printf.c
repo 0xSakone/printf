@@ -14,25 +14,19 @@ int dispatcher(int *count, int *i, const char * const format, va_list args)
 	{
 		case '%':
 			character_format(format[*i]);
-			*count += 2;
+			*count += 1;
 			*i += 1;
 			return (1);
 		case 'c':
-			count++;
+			*count += 1;
 			character_format((char)va_arg(args, int));
-			break;
-		case 'i':
-			*count += print_number(va_arg(args, int), 1);
-			break;
-		case 'd':
-			*count += print_number(va_arg(args, int), 1);
 			break;
 		case 's':
 			*count += string_format(va_arg(args, char *));
 			break;
 		default:
 			character_format(format[*i]);
-			*count += 2;
+			*count += 1;
 			*i += 1;
 			return (1);
 	}
