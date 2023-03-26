@@ -4,19 +4,17 @@
  * dispatcher - dispatch character to function
  * @count: current character printer to screen
  * @i: current format character
- * @format: text format
  * @args: arguments list
  * Return: 1 for skip current while block or 0 for nothing
  */
-int dispatcher(int *count, int *i, const char * const format, va_list args)
+int dispatcher(int *count, char i, va_list args)
 {
-	switch (format[*i])
+	switch (i)
 	{
 		case '%':
-			character_format(format[*i]);
+			character_format('%');
 			*count += 1;
-			*i += 1;
-			return (1);
+			break;
 		case 'c':
 			*count += 1;
 			character_format((char)va_arg(args, int));
@@ -26,7 +24,7 @@ int dispatcher(int *count, int *i, const char * const format, va_list args)
 			break;
 		default:
 			character_format('%');
-			character_format(format[*i]);
+			character_format(i);
 			*count += 2;
 			break;
 	}
@@ -40,28 +38,26 @@ int dispatcher(int *count, int *i, const char * const format, va_list args)
  */
 int _printf(const char * const format, ...)
 {
-	int i = 0, count = 0;
+	int count = 0;
+	char *fm;
 	va_list args;
 
 	va_start(args, format);
-	while (format && format[i])
+	fm = (char *)format;
+	while (*fm)
 	{
-		if (format[i] == '%')
+		if (*fm == '%')
 		{
-			i++;
-			if (format[i] == '\0')
-				break;
-			if (dispatcher(&count, &i, format, args) == 1)
+			fm++;
+			if (dispatcher(&count, *fm, args) == 1)
 				continue;
 		}
-		else if (format[i] != '\0')
+		else
 		{
 			count++;
-			character_format(format[i]);
+			character_format(*fm);
 		}
-		else
-			break;
-		i++;
+		fm++;
 	}
 	return (count);
 }

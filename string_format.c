@@ -7,8 +7,15 @@
  */
 int string_format(char *s)
 {
+	int c = 0;
+
 	if (s == NULL)
 		s = "(null)";
-	cprintf(s, _strlen(s));
-	return (_strlen(s));
+	while (*s)
+	{
+		cprintf(s, 1);
+		c++;
+		s++;
+	}
+	return (c);
 }
