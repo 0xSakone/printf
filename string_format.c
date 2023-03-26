@@ -7,6 +7,8 @@
  */
 int string_format(char *s)
 {
+	if (s == NULL)
+		s = "(null)";
 	cprintf(s, _strlen(s));
 	return (_strlen(s));
 }
