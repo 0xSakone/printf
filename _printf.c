@@ -25,10 +25,10 @@ int dispatcher(int *count, int *i, const char * const format, va_list args)
 			*count += string_format(va_arg(args, char *));
 			break;
 		default:
+			character_format('%');
 			character_format(format[*i]);
-			*count += 1;
-			*i += 1;
-			return (1);
+			*count += 2;
+			break;
 	}
 	return (0);
 }
