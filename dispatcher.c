@@ -30,34 +30,3 @@ int dispatcher(int *count, char i, va_list args)
 	}
 	return (0);
 }
-
-/**
- * _printf - printf function simulator
- * @format: text format
- * Return: number of character
- */
-int _printf(const char * const format, ...)
-{
-	int count = 0;
-	char *fm;
-	va_list args;
-
-	va_start(args, format);
-	fm = (char *)format;
-	while (*fm)
-	{
-		if (*fm == '%')
-		{
-			fm++;
-			if (dispatcher(&count, *fm, args) == 1)
-				continue;
-		}
-		else
-		{
-			count++;
-			character_format(*fm);
-		}
-		fm++;
-	}
-	return (count);
-}

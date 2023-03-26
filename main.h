@@ -21,6 +21,10 @@ int print_number(int n, int count);
  * string Formatter
  */
 int string_format(char *s);
+/*
+ * Dispatcher Function
+ */
+int dispatcher(int *count, char i, va_list args);
 
 int _printf(const char * const format, ...);
 int _strlen(char *s);
