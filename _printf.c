@@ -8,7 +8,6 @@
 int _printf(const char * const format, ...)
 {
 	int i = 0, count = 0;
-	//char current_character;
 	va_list args;
 
 	va_start(args, format);
@@ -32,7 +31,7 @@ int _printf(const char * const format, ...)
 					count += string_format(va_arg(args, char *));
 					break;
 				default:
-                    count++;
+					count++;
 					character_format(format[i]);
 					i++;
 					continue;
