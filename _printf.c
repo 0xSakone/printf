@@ -14,34 +14,30 @@ int _printf(const char * const format, ...)
 	va_start(args, format);
 	while (format && format[i])
 	{
-		current_character = format[i];
-		if (current_character == '%')
+		if (format[i] == '%')
 		{
 			i++;
-			current_character = format[i];
-			switch (current_character)
+			switch (format[i])
 			{
+				case '%':
+					count++;
+					current_character = format[i];
+					cprintf(&current_character, 1);
+					i++;
+					continue;
 				case 'c':
 					count++;
 					character_format((char)va_arg(args, int));
-					break;
-				case 'i':
-					count += print_number(va_arg(args, int), 1);
-					break;
-				case 'f':
-					count += print_number(va_arg(args, int), 1);
-					break;
-				case 'd':
-					count += print_number(va_arg(args, int), 1);
 					break;
 				case 's':
 					count += string_format(va_arg(args, char *));
 					break;
 			}
 		}
-		else
+		else if (format[i] != '\0')
 		{
 			count++;
+			current_character = format[i];
 			cprintf(&current_character, 1);
 		}
 		i++;
