@@ -3,6 +3,8 @@
 /**
  * string_format - string text formater
  * @s: string
+ * @output: buffer
+ * @count: buffer count
  * Return: number of character
  */
 int string_format(char *s, char *output, int count)

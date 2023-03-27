@@ -5,6 +5,7 @@
  * @count: current character printer to screen
  * @i: current format character
  * @args: arguments list
+ * @output: buffer
  * Return: 1 for skip current while block or 0 for nothing
  */
 int dispatcher(int count, char i, va_list args, char *output)
