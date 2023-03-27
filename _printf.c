@@ -22,6 +22,12 @@ int dispatcher(int *count, char i, va_list args)
 		case 's':
 			*count += string_format(va_arg(args, char *));
 			break;
+		case 'i':
+			*count += print_number(va_arg(args, int), 1);
+			break;
+		case 'd':
+			*count += print_number(va_arg(args, int), 1);
+			break;
 		default:
 			character_format('%');
 			character_format(i);
