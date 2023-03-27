@@ -5,17 +5,15 @@
  * @s: string
  * Return: number of character
  */
-int string_format(char *s)
+int string_format(char *s, char *output, int count)
 {
-	int c = 0;
-
 	if (s == NULL)
 		s = "(null)";
 	while (*s)
 	{
-		cprintf(s, 1);
-		c++;
+		character_format(*s, output, count);
+		count++;
 		s++;
 	}
-	return (c);
+	return (count);
 }

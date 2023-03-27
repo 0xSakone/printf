@@ -7,34 +7,25 @@
  * @args: arguments list
  * Return: 1 for skip current while block or 0 for nothing
  */
-int dispatcher(int *count, char i, va_list args)
+int dispatcher(int count, char i, va_list args, char *output)
 {
 	switch (i)
 	{
 		case '%':
-			character_format('%');
-			*count += 1;
+			count = character_format('%', output, count);
 			break;
 		case 'c':
-			*count += 1;
-			character_format((char)va_arg(args, int));
+			count = character_format((char)va_arg(args, int), output, count);
 			break;
 		case 's':
-			*count += string_format(va_arg(args, char *));
-			break;
-		case 'i':
-			*count += print_number(va_arg(args, int), 1);
-			break;
-		case 'd':
-			*count += print_number(va_arg(args, int), 1);
+			count = string_format(va_arg(args, char *), output, count);
 			break;
 		default:
-			character_format('%');
-			character_format(i);
-			*count += 2;
+			count = character_format('%', output, count);
+			count = character_format(i, output, count);
 			break;
 	}
-	return (0);
+	return (count);
 }
 
 /**
@@ -46,6 +37,7 @@ int _printf(const char * const format, ...)
 {
 	int count = 0;
 	char *fm;
+	char output[2048];
 	va_list args;
 
 	va_start(args, format);
@@ -55,16 +47,15 @@ int _printf(const char * const format, ...)
 		if (*fm == '%')
 		{
 			fm++;
-			if (dispatcher(&count, *fm, args) == 1)
-				continue;
+			count = dispatcher(count, *fm, args, output);
 		}
 		else
 		{
-			count++;
-			character_format(*fm);
+			count = character_format(*fm, output, count);
 		}
 		fm++;
 	}
 	va_end(args);
+	cprintf(output, count);
 	return (count);
 }

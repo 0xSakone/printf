@@ -8,7 +8,7 @@
 /*
  * charater_Formatter
  */
-int character_format(char c);
+int character_format(char c, char* output, int count);
 /*
  * print character
  */
@@ -20,7 +20,7 @@ int print_number(int n, int count);
 /*
  * string Formatter
  */
-int string_format(char *s);
+int string_format(char *s, char* output, int count);
 
 int _printf(const char * const format, ...);
 int _strlen(char *s);

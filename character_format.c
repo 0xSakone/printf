@@ -5,7 +5,9 @@
  * @c: character
  * Return: number of character
  */
-int character_format(char c)
+int character_format(char c, char* output, int count)
 {
-	return (cprintf(&c, 1));
+    output[count] = c;
+    count += 1;
+	return (count);
 }
