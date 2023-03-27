@@ -57,6 +57,5 @@ int _printf(const char * const format, ...)
 		}
 		fm++;
 	}
-	character_format('\0');
 	return (count);
 }
