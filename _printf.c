@@ -23,10 +23,7 @@ int dispatcher(int *count, char i, va_list args)
 			*count += string_format(va_arg(args, char *));
 			break;
 		default:
-			character_format('%');
-			character_format(i);
-			*count += 2;
-			break;
+			return (-1);
 	}
 	return (0);
 }
@@ -38,7 +35,7 @@ int dispatcher(int *count, char i, va_list args)
  */
 int _printf(const char * const format, ...)
 {
-	int count = 0;
+	int count = 0, _dispatch = 0;
 	char *fm;
 	va_list args;
 
@@ -49,8 +46,14 @@ int _printf(const char * const format, ...)
 		if (*fm == '%')
 		{
 			fm++;
-			if (dispatcher(&count, *fm, args) == 1)
+			_dispatch = dispatcher(&count, *fm, args);
+			if (_dispatch == 1)
 				continue;
+			else if (_dispatch == -1)
+			{
+				va_end(args);
+				return (-1);
+			}
 		}
 		else
 		{
