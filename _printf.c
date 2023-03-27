@@ -49,11 +49,6 @@ int _printf(const char * const format, ...)
 			_dispatch = dispatcher(&count, *fm, args);
 			if (_dispatch == 1)
 				continue;
-			else if (_dispatch == -1)
-			{
-				va_end(args);
-				return (-1);
-			}
 		}
 		else
 		{
@@ -62,5 +57,6 @@ int _printf(const char * const format, ...)
 		}
 		fm++;
 	}
+	character_format('\0');
 	return (count);
 }
