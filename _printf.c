@@ -53,9 +53,7 @@ int _printf(const char * const format, ...)
 			count = dispatcher(count, *fm, args, output);
 		}
 		else
-		{
 			count = character_format(*fm, output, count);
-		}
 		fm++;
 	}
 	va_end(args);
