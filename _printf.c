@@ -43,7 +43,7 @@ int _printf(const char * const format, ...)
 
 	va_start(args, format);
 	fm = (char *)format;
-	while (*fm)
+	while (*fm && *fm != '\0')
 	{
 		if (*fm == '%')
 		{
