@@ -41,9 +41,11 @@ int _printf(const char * const format, ...)
 	char output[2048];
 	va_list args;
 
+	if (!format)
+		return (-1);
 	va_start(args, format);
 	fm = (char *)format;
-	while (*fm && *fm != '\0')
+	while (*fm)
 	{
 		if (*fm == '%')
 		{
