@@ -23,10 +23,8 @@ int dispatcher(int *count, char i, va_list args)
 			*count += string_format(va_arg(args, char *));
 			break;
 		case 'i':
-			*count += print_number(va_arg(args, int), 1);
-			break;
 		case 'd':
-			*count += print_number(va_arg(args, int), 1);
+			*count += print_number(va_arg(args, int));
 			break;
 		case '\0':
 			return (-1);

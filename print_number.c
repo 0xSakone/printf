@@ -2,28 +2,29 @@
 
 /**
  * print_number - print number
- * @n: number to print
- * @count: number character count
+ * @number: number to print
  * Return: number of caracter
  */
-int print_number(int n, int count)
+int print_number(int number)
 {
-	int n2;
-	char *sign = "-";
+	int len = 0;
 	char c[1];
 
-	if (n < 0)
+	if (number < 0)
 	{
-		n2 = -n;
-		cprintf(sign, 1);
+		cprintf("-", 1);
+		number = -number;
+		len++;
 	}
-	else
-		n2 = n;
 
-	if ((n2 % 10) != n2)
-		count = print_number(n2 / 10, count++);
+	if (number / 10)
+	{
+		len += print_number(number / 10);
+	}
 
-	c[0] = (char)((n2 % 10) + '0');
+	c[0] = (char)(number % 10) + '0';
 	cprintf(c, 1);
-	return (count);
+	len++;
+
+	return (len);
 }
