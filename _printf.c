@@ -5,28 +5,36 @@
  * @count: current character printer to screen
  * @i: current format character
  * @args: arguments list
- * @output: buffer
  * Return: 1 for skip current while block or 0 for nothing
  */
-int dispatcher(int count, char i, va_list args, char *output)
+int dispatcher(int *count, char i, va_list args)
 {
 	switch (i)
 	{
 		case '%':
-			count = character_format('%', output, count);
+			character_format('%');
+			*count += 1;
 			break;
 		case 'c':
-			count = character_format((char)va_arg(args, int), output, count);
+			*count += 1;
+			character_format((char)va_arg(args, int));
 			break;
 		case 's':
-			count = string_format(va_arg(args, char *), output, count);
+			*count += string_format(va_arg(args, char *));
+			break;
+		case 'i':
+			*count += print_number(va_arg(args, int), 1);
+			break;
+		case 'd':
+			*count += print_number(va_arg(args, int), 1);
 			break;
 		default:
-			count = character_format('%', output, count);
-			count = character_format(i, output, count);
+			character_format('%');
+			character_format(i);
+			*count += 2;
 			break;
 	}
-	return (count);
+	return (0);
 }
 
 /**
@@ -38,7 +46,6 @@ int _printf(const char * const format, ...)
 {
 	int count = 0;
 	char *fm;
-	char output[8096];
 	va_list args;
 
 	va_start(args, format);
@@ -48,13 +55,15 @@ int _printf(const char * const format, ...)
 		if (*fm == '%')
 		{
 			fm++;
-			count = dispatcher(count, *fm, args, output);
+			if (dispatcher(&count, *fm, args) == 1)
+				continue;
 		}
 		else
-			count = character_format(*fm, output, count);
+		{
+			count++;
+			character_format(*fm);
+		}
 		fm++;
 	}
-
-	va_end(args);
-	return (count + 1);
+	return (count);
 }
