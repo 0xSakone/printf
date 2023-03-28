@@ -22,12 +22,6 @@ int dispatcher(int *count, char i, va_list args)
 		case 's':
 			*count += string_format(va_arg(args, char *));
 			break;
-		case 'i':
-			*count += print_number(va_arg(args, int), 1);
-			break;
-		case 'd':
-			*count += print_number(va_arg(args, int), 1);
-			break;
 		case '\0':
 			return (-1);
 		default:
@@ -60,7 +54,7 @@ int _printf(const char * const format, ...)
 		{
 			fm++;
 			_dispatcher = dispatcher(&count, *fm, args);
-			if (_dispatcher == 0)
+			if (_dispatcher == 1)
 				continue;
 			else if (_dispatcher == -1)
 				return (-1);
