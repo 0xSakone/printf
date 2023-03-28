@@ -38,7 +38,7 @@ int _printf(const char * const format, ...)
 {
 	int count = 0;
 	char *fm;
-	char output[2048];
+	char output[8096];
 	va_list args;
 
 	va_start(args, format);
@@ -55,8 +55,6 @@ int _printf(const char * const format, ...)
 		fm++;
 	}
 
-	if (count == 0)
-		return (-1);
 	va_end(args);
 	cprintf(output, count);
 	return (count);
