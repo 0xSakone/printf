@@ -28,6 +28,8 @@ int dispatcher(int *count, char i, va_list args)
 		case 'd':
 			*count += print_number(va_arg(args, int), 1);
 			break;
+		case '\0':
+			return (-1);
 		default:
 			character_format('%');
 			character_format(i);
@@ -44,7 +46,7 @@ int dispatcher(int *count, char i, va_list args)
  */
 int _printf(const char * const format, ...)
 {
-	int count = 0;
+	int count = 0, _dispatcher = 0;
 	char *fm;
 	va_list args;
 
@@ -57,8 +59,11 @@ int _printf(const char * const format, ...)
 		if (*fm == '%')
 		{
 			fm++;
-			if (dispatcher(&count, *fm, args) == 1)
+			_dispatcher = dispatcher(&count, *fm, args);
+			if (_dispatcher == 0)
 				continue;
+			else if (_dispatcher == -1)
+				return (-1);
 		}
 		else
 		{
