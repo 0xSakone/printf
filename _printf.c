@@ -21,6 +21,10 @@ int dispatcher(int count, char i, va_list args, char *output)
 		case 's':
 			count = string_format(va_arg(args, char *), output, count);
 			break;
+		case ' ':
+			return (-1);
+		case NULL:
+			return (-1);
 		default:
 			count = character_format('%', output, count);
 			count = character_format(i, output, count);
@@ -43,9 +47,6 @@ int _printf(const char * const format, ...)
 
 	if (!format)
 		return (-1);
-	if (_strlen((char *)format) == 2)
-		if (format[0] == '%' && format[1] == ' ')
-			return (-1);
 
 	va_start(args, format);
 	fm = (char *)format;
@@ -58,6 +59,8 @@ int _printf(const char * const format, ...)
 		}
 		else
 			count = character_format(*fm, output, count);
+		if (count == -1)
+			return (-1)
 		fm++;
 	}
 	va_end(args);
