@@ -34,9 +34,48 @@ int main(void)
 
     // caracteres_imprimes = _printf("Entier : %d\n", entier);
     // _printf("Nombre de caractères imprimés : %d\n", caracteres_imprimes);
+    int nombre1 = 42;
+    int nombre2 = -42;
 
-    len = _printf("%s %d\n", "Abdramane", 100);
-    len2 = printf("%s %d\n", "Abdramane", 100);
+    len = _printf("Test 1 - Nombre en binaire avec %%b : [%b]\n", 42);
+    len2 = printf("Test 1 - Nombre en binaire avec %%b : [101010]\n");
+    printf("Longueur : [%d, %i]\n", len, len2);
+
+    // Test 2: Imprimer un autre nombre en binaire
+    len = _printf("Test 2 - Autre nombre en binaire avec %%b : [%b]\n", 255);
+    len2 = printf("Test 2 - Autre nombre en binaire avec %%b : [11111111]\n");
+    printf("Longueur : [%d, %i]\n", len, len2);
+
+    // Test 3: Imprimer deux nombres en binaire
+    len = _printf("Test 3 - Deux nombres en binaire avec %%b : [%b, %b]\n", 8, 15);
+    len2 = printf("Test 3 - Deux nombres en binaire avec %%b : [1000, 1111]\n");
+    printf("Longueur : [%d, %i]\n", len, len2);
+
+    len = _printf("Entiers et caractères : [%d, %i, %c, %c]\n", 123, -456, 'a', 'Z');
+    len2 = printf("Entiers et caractères : [%d, %i, %c, %c]\n", 123, -456, 'a', 'Z');
+    printf("Longueur : [%d, %i]\n", len, len2);
+
+    len = _printf("Entiers grands et petits : [%d, %i]\n", INT_MAX, INT_MIN);
+    len2 = printf("Entiers grands et petits : [%d, %i]\n", INT_MAX, INT_MIN);
+    printf("Longueur : [%d, %i]\n", len, len2);
+
+    len = _printf("Chaînes et entiers : [%s, %s, %d, %i]\n", "Bonjour", "le monde", 42, -42);
+    len2 = printf("Chaînes et entiers : [%s, %s, %d, %i]\n", "Bonjour", "le monde", 42, -42);
+    printf("Longueur : [%d, %i]\n", len, len2);
+
+    len = _printf("Caractères spéciaux et entiers : [%c, %d, %c, %i]\n", '\n', 12345, '\t', -67890);
+    len2 = printf("Caractères spéciaux et entiers : [%c, %d, %c, %i]\n", '\n', 12345, '\t', -67890);
+    printf("Longueur : [%d, %i]\n", len, len2);
+
+
+    int caracteres_imprimes = _printf("Nombre positif avec %%d: %d, Nombre négatif avec %%d: %d\n", nombre1, nombre2);
+    _printf("Nombre de caractères imprimés : %d\n", caracteres_imprimes);
+
+    caracteres_imprimes = printf("Nombre positif avec %%i: %i, Nombre négatif avec %%i: %i\n", nombre1, nombre2);
+    printf("Nombre de caractères imprimés : %d\n", caracteres_imprimes);
+
+    len = _printf(" %0 %\n");
+    len2 = 2;//printf(" %0 \n");
     printf("[%d, %d]\n", len, len2);
     
     len = _printf("%s %%c\n", "Abdramane");
