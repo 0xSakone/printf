@@ -43,9 +43,6 @@ int _printf(const char * const format, ...)
 
 	if (!format || (format[0] == '%' && !format[1]))
 		return (-1);
-	else if (format[0] == '%')
-		if (format[1] == ' ' && !format[2])
-			return (-1);
 
 	va_start(args, format);
 	fm = (char *)format;
