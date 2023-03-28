@@ -17,6 +17,7 @@ int cprintf(char *buf, int len);
  * print number
  */
 int print_number(int n);
+int print_binary(unsigned int number);
 /*
  * string Formatter
  */

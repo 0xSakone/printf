@@ -26,6 +26,9 @@ int dispatcher(int *count, char i, va_list args)
 		case 'd':
 			*count += print_number(va_arg(args, int));
 			break;
+		case 'b':
+			*count += print_binary(va_arg(args, unsigned int));
+			break;
 		case '\0':
 			return (-1);
 		default:

@@ -49,3 +49,23 @@ int print_number(int number)
 
 	return (len);
 }
+
+/**
+ * print_binary - print binary number
+ * @number: number to print
+ * Return: number of caracter
+ */
+int print_binary(unsigned int number)
+{
+	int len = 0;
+	char c[1];
+
+	if (number / 2)
+		len += print_binary(number / 2);
+
+	c[0] = (char)(number % 2) + '0';
+	cprintf(c, 1);
+	len++;
+
+	return (len);
+}
