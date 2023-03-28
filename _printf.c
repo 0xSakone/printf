@@ -21,8 +21,6 @@ int dispatcher(int count, char i, va_list args, char *output)
 		case 's':
 			count = string_format(va_arg(args, char *), output, count);
 			break;
-		case '0':
-			return (-1);
 		case '\0':
 			return (-1);
 		default:
