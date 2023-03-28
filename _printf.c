@@ -54,6 +54,9 @@ int _printf(const char * const format, ...)
 			count = character_format(*fm, output, count);
 		fm++;
 	}
+
+	if (count == 0)
+		return (-1);
 	va_end(args);
 	cprintf(output, count);
 	return (count);
