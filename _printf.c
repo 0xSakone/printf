@@ -43,7 +43,7 @@ int _printf(const char * const format, ...)
 
 	if (!format)
 		return (-1);
-	if (_strlen((char *)format) > 1)
+	if (_strlen((char *)format) == 2)
 		if (format[0] == '%' && format[1] == ' ')
 			return (-1);
 
