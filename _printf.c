@@ -23,7 +23,7 @@ int dispatcher(int count, char i, va_list args, char *output)
 			break;
 		case ' ':
 			return (-1);
-		case NULL:
+		case 0:
 			return (-1);
 		default:
 			count = character_format('%', output, count);
@@ -60,7 +60,7 @@ int _printf(const char * const format, ...)
 		else
 			count = character_format(*fm, output, count);
 		if (count == -1)
-			return (-1)
+			return (-1);
 		fm++;
 	}
 	va_end(args);
