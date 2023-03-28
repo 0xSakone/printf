@@ -1,63 +1,57 @@
 #include "main.h"
 
+void _printbuffer(char buffer[], int *bufferindex);
 /**
- * dispatcher - dispatch character to function
- * @count: current character printer to screen
- * @i: current format character
- * @args: arguments list
- * Return: 1 for skip current while block or 0 for nothing
- */
-int dispatcher(int *count, char i, va_list args)
+* _printf - Printf function
+* @format: format.
+* Return: Printed chars.
+*/
+int _printf(const char *format, ...)
 {
-	switch (i)
+    int i, printed = 0, printed_chars = 0, flags, width, precision, size, bufferindex = 0;
+    va_list list;
+    char buffer[BUFFERSIZE];
+
+    if (format == NULL)
+	return (-1);
+
+    va_start(list, format);
+    for (i = 0; format && format[i] != '\0'; i++)
+    {
+	if (format[i] != '%')
 	{
-		case '%':
-			character_format('%');
-			*count += 1;
-			break;
-		case 'c':
-			*count += 1;
-			character_format((char)va_arg(args, int));
-			break;
-		case 's':
-			*count += string_format(va_arg(args, char *));
-			break;
-		default:
-			character_format('%');
-			character_format(i);
-			*count += 2;
-			break;
+	    buffer[bufferindex++] = format[i];
+	    if (bufferindex == BUFFERSIZE)
+		_printbuffer(buffer, &bufferindex);
+	    printed_chars++;
 	}
-	return (0);
+	else
+	{
+	    _printbuffer(buffer, &bufferindex);
+	    flags = _getflags(format, &i);
+	    width = _getwidth(format, &i, list);
+	    precision = _getprecision(format, &i, list);
+	    size = _getsize(format, &i);
+	    ++i;
+	    printed = _handleprint(format, &i, list, buffer, flags, width, precision, size);
+	    if (printed == -1)
+		return (-1);
+	    printed_chars += printed;
+	}
+    }
+    _printbuffer(buffer, &bufferindex);
+    va_end(list);
+    return (printed_chars);
 }
 
 /**
- * _printf - printf function simulator
- * @format: text format
- * Return: number of character
- */
-int _printf(const char * const format, ...)
+* _printbuffer - Prints the contents of the buffer if it exist
+* @buffer: Array of chars
+* @bufferindex: Index at which to add next char, represents the length.
+*/
+void _printbuffer(char buffer[], int *bufferindex)
 {
-	int count = 0;
-	char *fm;
-	va_list args;
-
-	va_start(args, format);
-	fm = (char *)format;
-	while (*fm)
-	{
-		if (*fm == '%')
-		{
-			fm++;
-			if (dispatcher(&count, *fm, args) == 1)
-				continue;
-		}
-		else
-		{
-			count++;
-			character_format(*fm);
-		}
-		fm++;
-	}
-	return (count);
+    if (*bufferindex > 0)
+    write(1, &buffer[0], *bufferindex);
+    *bufferindex = 0;
 }
