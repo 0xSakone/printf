@@ -3,25 +3,19 @@
 /**
  * string_format - string text formater
  * @s: string
- * @output: buffer
- * @count: buffer count
  * Return: number of character
  */
-int string_format(char *s, char *output, int count)
+int string_format(char *s)
 {
+	int c = 0;
+
 	if (s == NULL)
 		s = "(null)";
-
-	if (s[0] == '\0')
-	{
-		output[count] = '\0';
-		count++;
-	}
 	while (*s)
 	{
-		character_format(*s, output, count);
-		count++;
+		cprintf(s, 1);
+		c++;
 		s++;
 	}
-	return (count);
+	return (c);
 }
