@@ -43,9 +43,9 @@ int _printf(const char * const format, ...)
 
 	if (format == NULL)
 		return (-1);
-	else if (format[0] == '%')
-		if (_strlen((char *)format) == 1 || format[1] == '\0' || format[1] == ' ')
-			return (-1);
+	// else if (format[0] == '%')
+	// 	if (_strlen((char *)format) == 1 || format[1] == '\0' || format[1] == ' ')
+	// 		return (-1);
 
 	va_start(args, format);
 	fm = (char *)format;
