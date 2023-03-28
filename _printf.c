@@ -55,8 +55,6 @@ int _printf(const char * const format, ...)
 		}
 		else
 			count = character_format(*fm, output, count);
-		if (count == -1 && *(fm + 1) != '\0')
-			return (-1);
 		fm++;
 	}
 	va_end(args);
