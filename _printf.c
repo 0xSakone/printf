@@ -41,8 +41,12 @@ int _printf(const char * const format, ...)
 	char output[2048];
 	va_list args;
 
-	if (_strlen((char *)format) == 0 || (format[0] == '%' && _strlen((char *)format) == 1))
+	if (format == NULL)
 		return (-1);
+	else if (format[0] == '%')
+		if (_strlen((char *)format) == 1 || format[1] == '\0')
+			return (-1);
+
 	va_start(args, format);
 	fm = (char *)format;
 	while (*fm)
