@@ -23,8 +23,10 @@ int dispatcher(int count, char i, va_list args, char *output)
 			break;
 		case ' ':
 			return (-1);
-		case 0:
+			break;
+		case '\0':
 			return (-1);
+			break;
 		default:
 			count = character_format('%', output, count);
 			count = character_format(i, output, count);
