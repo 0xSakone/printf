@@ -48,6 +48,8 @@ int _printf(const char * const format, ...)
 	char *fm;
 	va_list args;
 
+	if (!format)
+		return (-1);
 	va_start(args, format);
 	fm = (char *)format;
 	while (*fm)
@@ -65,5 +67,6 @@ int _printf(const char * const format, ...)
 		}
 		fm++;
 	}
+	va_end(args);
 	return (count);
 }
