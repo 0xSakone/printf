@@ -41,7 +41,7 @@ int _printf(const char * const format, ...)
 	char output[2048];
 	va_list args;
 
-	if (_strlen((char *)format) == 0)
+	if (!format)
 		return (-1);
 
 	va_start(args, format);
