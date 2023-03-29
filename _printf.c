@@ -1,16 +1,43 @@
 #include "main.h"
 
 /**
- * _1bit - printf function simulator
- * @count: text format
- * @c: character
- * Return: number of character
+ * dispatcher - dispatch character to function
+ * @count: current character printer to screen
+ * @i: current format character
+ * @args: arguments list
+ * Return: 1 for skip current while block or 0 for nothing
  */
-int _1bit(int *count, char c)
+int dispatcher(int *count, char i, va_list args)
 {
-	*count += 1;
-	cprintf(&c, 1);
-	return (*count);
+	switch (i)
+	{
+		case '%':
+			character_format('%');
+			*count += 1;
+			break;
+		case 'c':
+			*count += 1;
+			character_format((char)va_arg(args, int));
+			break;
+		case 's':
+			*count += string_format(va_arg(args, char *));
+			break;
+		case 'i':
+		case 'd':
+			*count += print_number(va_arg(args, int));
+			break;
+		case 'b':
+			*count += print_binary(va_arg(args, unsigned int));
+			break;
+		case '\0':
+			return (-1);
+		default:
+			character_format('%');
+			character_format(i);
+			*count += 2;
+			break;
+	}
+	return (0);
 }
 
 /**
@@ -20,42 +47,30 @@ int _1bit(int *count, char c)
  */
 int _printf(const char * const format, ...)
 {
-	int count = 0, _dispatcher = 0, i = 0, find = 0;
+	int count = 0, _dispatcher = 0;
 	char *fm;
 	va_list args;
 
 	if (!format)
 		return (-1);
 	va_start(args, format);
-	func _f[] = {
-		{'c', character_format}, {'s', string_format}, {'d', number_format},
-		{'i', number_format}, {'b', binary_format}, {'%', perc_format}, {'\0', NULL}
-	};
 	fm = (char *)format;
 	while (*fm)
 	{
 		if (*fm == '%')
 		{
-			find = 0;
 			fm++;
-			for (i = 0; i < (int)(sizeof(_f) / sizeof(func)); i++)
-			{
-				if (*fm == _f[i].c)
-				{
-					_dispatcher = _f[i].call(&count, args);
-					find = 1;
-					if (_dispatcher == -1)
-						return (-1);
-				}
-			}
-			if (find == 0)
-			{
-				_1bit(&count, '%');
-				_1bit(&count, *fm);
-			}
+			_dispatcher = dispatcher(&count, *fm, args);
+			if (_dispatcher == 1)
+				continue;
+			else if (_dispatcher == -1)
+				return (-1);
 		}
 		else
-			_1bit(&count, *fm);
+		{
+			count++;
+			character_format(*fm);
+		}
 		fm++;
 	}
 	va_end(args);
