@@ -5,10 +5,24 @@
 #include <stdarg.h>
 #include <unistd.h>
 
+
+typedef int (*caller)(int*, va_list);
+
+/**
+ * struct func - func type.
+ * @c: charaxcter
+ * @call: function to call
+ */
+typedef struct func
+{
+	char c;
+	caller call;
+};
 /*
  * charater_Formatter
  */
-int character_format(char c);
+int character_format(int *count, va_list args);
+int perc_format(int *count, va_list args);
 /*
  * print character
  */
@@ -18,10 +32,12 @@ int cprintf(char *buf, int len);
  */
 int print_number(int n);
 int print_binary(unsigned int number);
+int number_format(int *count, va_list args);
+int binary_format(int *count, va_list args);
 /*
  * string Formatter
  */
-int string_format(char *s);
+int string_format(int *count, va_list args);
 
 int _printf(const char * const format, ...);
 int _strlen(char *s);
