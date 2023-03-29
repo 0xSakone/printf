@@ -51,6 +51,18 @@ int print_number(int number)
 }
 
 /**
+ * number_format - dispatch character to function
+ * @count: current character printer to screen
+ * @args: arguments list
+ * Return: 1 for skip current while block or 0 for nothing
+ */
+int number_format(int *count, va_list args)
+{
+	*count += print_number(va_arg(args, int));
+	return (*count);
+}
+
+/**
  * print_binary - print binary number
  * @number: number to print
  * Return: number of caracter
@@ -68,4 +80,18 @@ int print_binary(unsigned int number)
 	len++;
 
 	return (len);
+}
+
+/**
+ * binary_format - format binary
+ * @count: current character printer to screen
+ * @args: arguments list
+ * Return: 1 for skip current while block or 0 for nothing
+ */
+int binary_format(int *count, va_list args)
+{
+	unsigned int n = va_arg(args, unsigned int);
+
+	*count += print_binary(n);
+	return (*count);
 }
