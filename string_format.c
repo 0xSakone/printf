@@ -2,13 +2,16 @@
 
 /**
  * string_format - string text formater
- * @s: string
+ * @count: current character count
+ * @args: arguments
  * Return: number of character
  */
-int string_format(char *s)
+int string_format(int *count, va_list args)
 {
 	int c = 0;
+	char *s;
 
+	s = va_arg(args, char *);
 	if (s == NULL)
 		s = "(null)";
 	while (*s)
@@ -16,6 +19,7 @@ int string_format(char *s)
 		cprintf(s, 1);
 		c++;
 		s++;
+		*count += 1;
 	}
-	return (c);
+	return (*count);
 }
