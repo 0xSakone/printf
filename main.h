@@ -49,6 +49,7 @@ int base_format(unsigned int number, int base, int uppercase);
  * string Formatter
  */
 int string_format(int *count, va_list args);
+int big_string_format(int *count, va_list args);
 
 int _printf(const char * const format, ...);
 int _strlen(char *s);
