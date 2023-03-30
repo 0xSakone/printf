@@ -78,6 +78,7 @@ int _printf(const char * const format, ...)
 	count = dispatch(&count, args, fm);
 	if (count == -1)
 		return (-1);
+	cprintf('\0', count);
 	va_end(args);
 	return (count);
 }
