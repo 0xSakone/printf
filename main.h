@@ -40,6 +40,11 @@ int print_number(int n);
 int print_binary(unsigned int number);
 int number_format(int *count, va_list args);
 int binary_format(int *count, va_list args);
+int base_u(int *count, va_list args);
+int base_o(int *count, va_list args);
+int base_x(int *count, va_list args);
+int base_X(int *count, va_list args);
+int base_format(unsigned int number, int base, int uppercase);
 /*
  * string Formatter
  */

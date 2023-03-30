@@ -26,7 +26,8 @@ int dispatch(int *count, va_list args, char *fm)
 
 	func _f[] = {
 		{'c', character_format}, {'s', string_format}, {'d', number_format},
-		{'i', number_format}, {'b', binary_format}, {'%', perc_format}, {'\0', NULL}
+		{'i', number_format}, {'b', binary_format}, {'%', perc_format}, {'\0', NULL},
+		{'u', base_u}, {'o', base_o}, {'x', base_x}, {'X', base_X}
 	};
 	while (*fm)
 	{
