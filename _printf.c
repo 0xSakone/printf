@@ -34,6 +34,8 @@ int dispatch(int *count, va_list args, char *fm)
 		{
 			find = 0;
 			fm++;
+			if (*fm == '\0' || *fm == '0')
+				fm++;
 			for (i = 0; i < (int)(sizeof(_f) / sizeof(func)); i++)
 			{
 				if (*fm == _f[i].c)
