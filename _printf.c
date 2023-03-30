@@ -23,14 +23,15 @@ int _printf(const char * const format, ...)
 	int count = 0, _dispatcher = 0, i = 0, find = 0;
 	char *fm;
 	va_list args;
-
-	if (!format)
-		return (-1);
-	va_start(args, format);
 	func _f[] = {
 		{'c', character_format}, {'s', string_format}, {'d', number_format},
 		{'i', number_format}, {'b', binary_format}, {'%', perc_format}, {'\0', NULL}
 	};
+
+	if (!format)
+		return (-1);
+	va_start(args, format);
+	
 	fm = (char *)format;
 	while (*fm)
 	{
