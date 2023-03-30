@@ -34,8 +34,10 @@ int dispatch(int *count, va_list args, char *fm)
 		{
 			find = 0;
 			fm++;
-			if (*fm == '\0' || *fm == '0')
+			if (*fm == '0')
 				fm++;
+			else if (*fm == '\0')
+				return (-1);
 			for (i = 0; i < (int)(sizeof(_f) / sizeof(func)); i++)
 			{
 				if (*fm == _f[i].c)
@@ -78,7 +80,6 @@ int _printf(const char * const format, ...)
 	count = dispatch(&count, args, fm);
 	if (count == -1)
 		return (-1);
-	cprintf('\0', count);
 	va_end(args);
 	return (count);
 }
