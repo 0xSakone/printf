@@ -5,19 +5,25 @@
 #include <stdarg.h>
 #include <unistd.h>
 
-
+/*
+ * typedef caller - Type de pointeur de fonction
+ * @int: entier en argument
+ * @va_list: fonction à appeler
+ */
 typedef int (*caller)(int*, va_list);
 
 /**
- * struct func - func type.
+ * struct funct - func type dfd fdkfbd dfjnd
  * @c: charaxcter
  * @call: function to call
+ * Description: sdfg dn sdkfjn
  */
-typedef struct func
+typedef struct funct
 {
 	char c;
 	caller call;
-};
+} func;
+
 /*
  * charater_Formatter
  */
