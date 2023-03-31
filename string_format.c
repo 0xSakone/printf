@@ -32,8 +32,7 @@ int string_format(int *count, va_list args)
  */
 int big_string_format(int *count, va_list args)
 {
-	char *s;
-	char hex[2];
+	char *s, hex[2];
 	int temp;
 
 	s = va_arg(args, char *);

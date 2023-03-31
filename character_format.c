@@ -8,11 +8,11 @@
  */
 int character_format(int *count, va_list args)
 {
-	char c[1];
+	char c;
 
-	c[0] = (char)va_arg(args, int);
+	c = va_arg(args, int);
 	*count += 1;
-	return (cprintf(c, 1));
+	return (cprintf(&c, 1));
 }
 
 /**
